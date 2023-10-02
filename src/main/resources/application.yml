@@ -1,0 +1,52 @@
+server:
+  port: 20260
+
+spring:
+  application.name: identity-service
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: angularpay
+      username: service_account
+      password: service_account_password
+      authentication-database: angularpay
+
+angularpay:
+  otpUrl: http://localhost:20480
+  notificationUrl: http://localhost:20270
+  userconfigUrl: http://localhost:20210
+  cipherUrl: http://localhost:20420
+  pageSize: 50
+  codecSizeInMB: 50
+  session:
+    defaultAccessTokenExpirySeconds: 1800
+    defaultRefreshTokenExpirySeconds: 2100
+  security:
+    privateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCQBIcR/74UZqp4wCoq5Mj3HxgUcLiMLCvxZVDZjCxAuix0NjJ60NNJatOjD9Bu21MiV9r1lXgQg3QAMnzmNpm21x8M+5jE/g6WBn4f7qPsfSAIzfyT5NF1zEcQB3pzeY49ivoHRiAzenu8W+a6VBOxqZL5AxU/VNNClka/A0HHlE5IW/Oq/N+bdBSYmeVTd/28Cq7j1rPRQmWxKbRoJEayG9qTIAoW2wBimndJUhtTDjbWMsxtXJ/aKs+9k4wKDQza5fs1mhk5GF6cZAWPb1rCX6j0Dun/9LNfD+IAVSJ+J+qvW783Is4iICLraWIdFjFmAQMeEyoOoLtShnm442yTAgMBAAECggEACqfbGpDSjo3eFRsaw5uz5tztGi4Q6YYnJjA54C7H424i9eJAr+edinQV/p2f7WPa7dKUR9FsVcR0I8OYjCwECYw3Ju3CquilSaJnWJN+m3PSl/QtuP+YI+AebegvvjWDObh7sWgV39kzKIegNa8c2etTDYuV2d671tRpnZ5vEoYgjMemq3nX0nT+4o81Ssl63srAIYKAaTY0GNtIlFdR6fVk/I6Rf6jEOsh1U8OLoNZILFg+Ms1sZWWF8V/9j4nEljOaHCM4TaMnJf2u62KvQvVcPvgDmCaYSqTqRzjW4VRwuG3VX71rt18fXSljHLQBM7JTWbCQ/hSk0vtkEddpAQKBgQDtBtLLFk3ns1Y8tCVKy6pB+Q91j+O9LRcycF8UHalf5AqS3iSwKEcvs/GYwO+CO157bE95iOHM4HFWf2UWujFJwTdUuIGmlQ1V662H3sVMRFZNQA4KaxMAcbmtzWWl7qM1jbhPgXyv25ab5ZDQ2qo91y6PE0YbfnIvxnwU3MP4gQKBgQCbi8ELRfCg/cWbGMUR858v15dXTShyxqnxd9YBt2Z06amlygR7VroLTs0vnPtPva1ADYdTyaCdSwg5lAdXS/yy/+iaJgUnkx/zq6dKedTxvPzISKifzBg2UdiptkgfeaUD2s/Yyv0Zbe4q4bHoUAlWJAtB8IOH9MY6eX+YRPJ7EwKBgQCpUoOJItDaYUmMqeAuE1n4MRSzFexJuwlkNdQmCZ5yavSGwHyS/uMDl9dSGRm//etb3h7UIk2zzu4ILY+ocbA+EPIW6otr1fSl2WuosSJefj7shoLBPIZhfdx35U/k/pnG6wuseEL7WbG4goE2Qc71yF9xRAKEJ4sox/Dh8mdogQKBgQCLc6xK8xVdAKec+YQVKBnbxqnEd0SAQmQyPIH9X/PXdXXHUWrbOVHquWdz/IXDZAZjmr1s/SOmYZKqLHC4b0PLJ2veZ5/PbzQCPi7psnibkhf/aETlnxFGAfMBlI7syR6MaixV7QclOU2B3H6oDLmSJRaCs6L4zRa7bhpa5dWPSQKBgCL7aZG0FSvcpE0m6SGUqSzj/Xk6SvoaFnNiqQo6GY/tFY9IVAzI74IciQOAITQzjnXxV7OoTxnFoxM5K3X8wF2PwsM4L3WO6TVU4pj3ZvHdkdNXNGuEpdOV0GFdlsg2R1Pp4I7S2GaaR8yJcgjYOHFVyruBQTLQJP4Jb54uvhnr
+    publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkASHEf++FGaqeMAqKuTI9x8YFHC4jCwr8WVQ2YwsQLosdDYyetDTSWrTow/QbttTIlfa9ZV4EIN0ADJ85jaZttcfDPuYxP4OlgZ+H+6j7H0gCM38k+TRdcxHEAd6c3mOPYr6B0YgM3p7vFvmulQTsamS+QMVP1TTQpZGvwNBx5ROSFvzqvzfm3QUmJnlU3f9vAqu49az0UJlsSm0aCRGshvakyAKFtsAYpp3SVIbUw421jLMbVyf2irPvZOMCg0M2uX7NZoZORhenGQFj29awl+o9A7p//SzXw/iAFUififqr1u/NyLOIiAi62liHRYxZgEDHhMqDqC7UoZ5uONskwIDAQAB
+    issuer: https://angularpay.io
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10000
+  bruteForceGuard:
+    maxLoginAttempts: 10
+    blockDurationInHours: 24
+  googleRecaptcha:
+    url: https://www.google.com/recaptcha/api/siteverify
+    key: 6LezoUEdAAAAAOhJMDU1X6juxzPsB9bHXcYUfCXe
+    secret: 6LezoUEdAAAAAHCOJapAxFZxrNgKxF6J29Lp87Jk
+    threshold: 0.7
+    enabled: true
+  passwordResetTTL:
+    confirmationTTLSeconds: 120
+    passwordResetTTLSeconds: 180
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG

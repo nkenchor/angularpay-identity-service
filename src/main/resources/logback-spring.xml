@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="30 seconds">
+    <springProperty scope="context" name="app_name" source="spring.application.name"/>
+    <property name="LOG_PATH" value="./logs"/>
+    <property name="FILE_NAME_PATTERN" value="${LOG_PATH}/${app_name}.%d{yyyy-MM-dd}.%i.log.gz"/>
+    <property name="FILE" value="${LOG_PATH}/${app_name}.log"/>
+    <property name="MAX_HISTORY" value="30"/>
+    <property name="MAX_FILE_SIZE" value="50MB"/>
+
+    <logger name="io.angularpay" level="INFO"/>
+
+    <springProfile name="elk">
+        <appender name="JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${FILE}</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>${FILE_NAME_PATTERN}</FileNamePattern>
+                <MaxHistory>${MAX_HISTORY}</MaxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="JSON"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="!elk">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%X{correlation_id}]) %highlight(%-5level) %logger{36}.%M- %msg%n
+                </Pattern>
+            </layout>
+        </appender>
+
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${FILE}</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>${FILE_NAME_PATTERN}</FileNamePattern>
+                <MaxHistory>${MAX_HISTORY}</MaxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{correlation_id}] %-5level %c{1} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+</configuration>
